@@ -1,0 +1,68 @@
+<html>
+<head>
+  <title>Regressiya</title>
+  <link rel="stylesheet" href="style/style.css">
+</head>
+<body ng-app='regressiyaModul' ng-controller="RegressiyaController" >
+  <form name="choosenDataFromForm">
+    <input type='radio' ng-model="dataFrom" value="file" ng-change="changeRadioAction();"> Fayldan o`qish </br>
+    <input type='radio' ng-model="dataFrom" value="input" ng-change="changeRadioAction();"> Kiritish </br>
+    <input type='radio' ng-model="dataFrom" value="random" ng-change="changeRadioAction();"> Tasodifan hosil qilish </br></br>
+    <label>Daraja: </label><input type="number" name="powerIn" ng-model="power" min="1" max="100" required></br></br>
+    <button ng-click="generateNumbers();">Generate</button>
+    <button ng-click="result();" ng-disabled="!x.length > 0">Result</button>
+  </form>
+  <!-- file type container -->
+  <div ng-show="dataFrom=='file'">
+    <input type="file" fileread="fileChoose"/>
+    <pre>Data in file: {{ fileChoose | json }}</pre>
+ </div>
+ <!-- input type container -->
+ <div ng-show="dataFrom=='input'">
+  <textarea rows="10" cols="30" ng-model="inputStr" ng-show="dataFrom=='input'" ></textarea>
+  <p> Data in input: {{inputStr | json}} </p>
+ </div>
+ <!-- input type container -->
+ <div ng-show="dataFrom=='random'">
+  <label>Qatorlar soni: </label><input type="number" name="rowCount" ng-model="rows" min="10" max="100" required></br></br>
+  <label>Ustunlar soni: </label><input type="number" name="colCount" ng-model="cols" min="10" max="100" required></br></br>
+ </div>
+ <div ng-show="x.length > 0">
+  <h1>Generated numbers</h1>
+  <table align="center">
+    <th ng-repeat="xs in x[0] track by $index">X{{$index}}</th>
+    <th>Y</th>
+    <tr ng-repeat="nums in x track by $index">
+      <td ng-repeat="num in nums track by $index">{{num}}</td>
+      <td>{{y[$index]}}</td>
+    </tr>
+  </table>
+  <!--{{x | json}}
+  {{y | json}}-->
+ </div>
+ <div id="generated-nums-content">
+  <div ng-show="a.length > 0" class="result-nums-content">
+  <h1>Result A</h1>
+  <table align="center">
+    <tr ng-repeat="num in a track by $index">
+      <td>a{{$index + 1}}</td>
+      <td>{{num}}</td>
+    </tr>
+  </table>
+  <!--{{numbers | json}} -->
+ </div>
+ <div ng-show="errors.length > 0" class="result-nums-content">
+  <h1>Errors</h1>
+  <table align="center">
+    <tr ng-repeat="num in errors track by $index">
+      <td>E{{$index + 1}}</td>
+      <td>{{num}}</td>
+    </tr>
+  </table>
+  <!--{{numbers | json}} -->
+ </div>
+ </div>
+</body>
+  <script type="text/javascript" src="js/angular.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+</html>

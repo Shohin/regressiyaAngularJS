@@ -1,0 +1,20 @@
+table, th, td {
+    border: 1px solid black;
+    font-size: 25px;
+    text-align: center;
+}
+td {
+  width: 50px;
+  height: 50px;
+}
+textarea {
+  font-size: 20px;
+}
+#generated-nums-content {
+  width: 100%;
+  margin: 0 auto;
+}
+.result-nums-content {
+  float: left;
+  width: 50%;
+}
